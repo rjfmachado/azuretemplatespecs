@@ -1,0 +1,84 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "vnetName": {
+            "type": "string",
+            "metadata": {
+                "description": "Virtual Network name"
+            }
+        },
+        "addressSpace": {
+            "type": "object",
+            "defaultValue": {
+                "addressPrefixes": [
+                    "10.0.0.0/16"
+                ]
+            },
+            "metadata": {
+                "description": "description"
+            }
+        },
+        "subnetArray": {
+            "type": "array",
+            "defaultValue": [
+                {
+                    "name": "Subnet-1",
+                    "properties": {
+                        "addressPrefix": "10.0.0.0/24"
+                    }
+                },
+                {
+                    "name": "Subnet-2",
+                    "properties": {
+                        "addressPrefix": "10.0.1.0/24"
+                    }
+                }
+            ],
+            "minLength": 1,
+            "metadata": {
+                "description": "Virtual Network subnets array"
+            }
+        },
+        "dnsServers": {
+            "type": "array",
+            "defaultValue": [],
+            "metadata": {
+                "description": "Configure the DNS servers for the Virtual Network."
+            }
+        },
+        "tags": {
+            "type": "object",
+            "defaultValue": {
+                //"displayName": "virtualNetwork1"
+            },
+            "metadata": {
+                "description": "Optional. Resource tags."
+            }
+        }
+    },
+    "functions": [],
+    "variables": {
+        "apiVersion": {
+            "virtualnetwork": "2020-05-01"
+        }
+
+    },
+    "resources": [
+        {
+            "type": "Microsoft.Network/virtualNetworks",
+            "apiVersion": "[variables('apiVersion').virtualnetwork]",
+            "name": "[parameters('vnetName')]",
+            "location": "[resourceGroup().location]",
+            "tags": "[if(empty(parameters('tags')), json('null'), parameters('tags'))]",
+            "properties": {
+                "addressSpace": "[parameters('addressSpace')]",
+                "subnets": "[parameters('subnetArray')]",
+                "dhcpOptions": {
+                    "dnsServers": "[parameters('dnsServers')]"
+                }
+            }
+        }
+    ],
+    "outputs": {}
+}
