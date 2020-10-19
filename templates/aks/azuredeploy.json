@@ -89,8 +89,8 @@
                 "outboundType": "loadBalancer",
                 "networkPlugin": "azure",
                 "networkPolicy": "calico",
-                "serviceCidr": "10.0.0.0/16",
-                "dnsServiceIp": "10.0.0.10",
+                "serviceCidr": "10.254.0.0/16",
+                "dnsServiceIp": "10.254.0.4",
                 "dockerBridgeCidr": "172.17.0.1/16"
             }
         },
@@ -135,12 +135,12 @@
                     "kubeDashboard": {
                         "enabled": false
                     },
-                    "omsagent": {
-                        "enabled": true,
-                        "config": {
-                            "logAnalyticsWorkspaceResourceID": "[variables('cluster').workspaceId]"
-                        }
-                    },
+                    // "omsagent": {
+                    //     "enabled": true,
+                    //     "config": {
+                    //         "logAnalyticsWorkspaceResourceID": "[variables('cluster').workspaceId]"
+                    //     }
+                    // },
                     "azurepolicy": {
                         "enabled": "[parameters('aksPolicy')]",
                         "config": {

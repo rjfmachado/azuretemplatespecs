@@ -6,7 +6,7 @@
             "value": "ricardma01" // TODO: Fill in parameter value
         },
         "kubernetesVersion": {
-            "value": "ricardma" // TODO: Fill in parameter value
+            "value": "1.18.2" // TODO: Fill in parameter value
         },
         "vnetName": {
             "value": "aksvnet" // TODO: Fill in parameter value
