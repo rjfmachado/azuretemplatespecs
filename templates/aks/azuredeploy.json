@@ -190,34 +190,16 @@
                 "name": "Basic",
                 "tier": "[parameters('uptimeSLA')]"
             }
-        },
-        // {
-        //     "apiVersion": "[variables('apiVersion').rbac]",
-        //     "type": "Microsoft.ContainerService/managedClusters/providers/roleAssignments",
-        //     "name": "[concat(parameters('name'), '/Microsoft.Authorization/', guid(resourceGroup().id, parameters('name'), 'Monitoring Metrics Publisher'))]",
-        //     "properties": {
-        //         // Monitoring Metrics Publisher = 3913510d-42f4-4e42-8a64-420c390055eb
-        //         "roleDefinitionId": "[resourceId('Microsoft.Authorization/roleDefinitions', '3913510d-42f4-4e42-8a64-420c390055eb')]",
-        //         "principalId": "[reference(concat('Microsoft.ContainerService/managedClusters/', parameters('name')), variables('apiVersion').aks).addonProfiles.omsagent.identity.objectId]",
-        //         "scope": "[variables('outputs').resourceId]"
-        //     }
-        // },
-        {
-            "apiVersion": "[variables('apiVersion').rbac]",
-            "type": "Microsoft.Network/virtualNetworks/providers/roleAssignments",
-            "name": "[concat(parameters('vnetName'), '/', '/Microsoft.Authorization/', guid(resourceGroup().id, parameters('aksname'), 'Network Contributor'))]",
-            "properties": {
-                // Network Contributor = 4d97b98b-1d4f-4787-a291-c67834d212e7
-                "roleDefinitionId": "[resourceId('Microsoft.Authorization/roleDefinitions', '4d97b98b-1d4f-4787-a291-c67834d212e7')]",
-                "principalId": "[reference(concat('Microsoft.ContainerService/managedClusters/', parameters('aksname')), variables('apiVersion').aks, 'Full').identity.principalId]",
-                "scope": "[resourceId('Microsoft.Network/virtualNetworks/', parameters('vnetName'))]"
-            }
         }
     ],
     "outputs": {
         "name": {
             "type": "string",
             "value": "[parameters('aksname')]"
+        },
+        "principalId": {
+            "type": "string",
+            "value": "[reference(concat('Microsoft.ContainerService/managedClusters/', parameters('aksname')), variables('apiVersion').aks, 'Full').identity.principalId]"
         },
         "resourceId": {
             "type": "string",
