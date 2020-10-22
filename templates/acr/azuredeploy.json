@@ -2,16 +2,24 @@
     "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
     "contentVersion": "1.0.0.0",
     "parameters": {
-        "acrResourceGroupName": {
-            "type": "string",
-            "metadata": {
-                "description": "Azure Container Registry resource group name"
-            }
-        },
         "acrName": {
             "type": "string",
             "metadata": {
                 "description": "Azure Container Registry name"
+            }
+        },
+        "location": {
+            "type": "string",
+            "defaultValue": "[resourceGroup().location]",
+            "metadata": {
+                "description": "description"
+            }
+        },
+        "acrSKU": {
+            "type": "string",
+            "defaultValue": "Basic",
+            "metadata": {
+                "description": "description"
             }
         }
     },
@@ -19,14 +27,15 @@
     "variables": {},
     "resources": [
         {
-            "apiVersion": "[variables('apiVersion').rbac]",
-            "type": "Microsoft.ContainerRegistry/registries/providers/roleAssignments",
-            "name": "[concat(parameters('acrName'), '/Microsoft.Authorization/', guid(resourceGroup().id, parameters('name'), 'AcrPull'))]",
+            "name": "[parameters('acrName')]",
+            "type": "Microsoft.ContainerRegistry/registries",
+            "apiVersion": "2019-05-01",
+            "location": "[parameters('location')]",
+            "sku": {
+                "name": "[parameters('acrSKU')]"
+            },
             "properties": {
-                // AcrPull = 7f951dda-4ed3-4680-a7ca-43fe172d538d
-                "roleDefinitionId": "[resourceId('Microsoft.Authorization/roleDefinitions', '7f951dda-4ed3-4680-a7ca-43fe172d538d')]",
-                "principalId": "[reference(concat('Microsoft.ContainerService/managedClusters/', parameters('name')), variables('apiVersion').aks).identityProfile.kubeletidentity.objectId]",
-                "scope": "[variables('cluster').acrId]"
+                "adminUserEnabled": true
             }
         }
     ],

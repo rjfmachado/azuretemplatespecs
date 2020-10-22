@@ -1,0 +1,1 @@
+az ts create --name acr --resource-group templateSpecs --location westeurope --template-file azuredeploy.json --version "0.0.1"
