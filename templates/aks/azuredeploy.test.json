@@ -2,17 +2,62 @@
     "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentParameters.json#",
     "contentVersion": "1.0.0.0",
     "parameters": {
-        "aksname": {
-            "value": "ricardma01" // TODO: Fill in parameter value
+        "aksName": {
+            "value": "ricardma01"
         },
-        "kubernetesVersion": {
-            "value": "1.18.2" // TODO: Fill in parameter value
+        "aksKubernetesVersion": {
+            "value": "1.18.8"
         },
         "vnetName": {
-            "value": "aksvnet" // TODO: Fill in parameter value
+            "value": "aksvnet"
         },
         "vnetResourceGroupName": {
-            "value": "aksvnet" // TODO: Fill in parameter value
+            "value": "cloudnativenetwork"
+        },
+        "aksAgentPoolProfiles": {
+            "value": [
+                {
+                    "name": "default",
+                    "nodeCount": 2,
+                    "nodeVmSize": "Standard_B2s",
+                    "subnetName": "aks",
+                    "availabilityZones": [
+                        "1",
+                        "2",
+                        "3"
+                    ],
+                    "osType": "Linux",
+                    "enableAutoScaling": true,
+                    "maxCount": 6,
+                    "minCount": 2,
+                    "mode": "System",
+                    "nodeLabels": {},
+                    "nodeTaints": []
+                },
+                {
+                    "name": "app1",
+                    "nodeCount": 1,
+                    "nodeVmSize": "Standard_B2s",
+                    "subnetName": "app1",
+                    "availabilityZones": [
+                        "1",
+                        "2",
+                        "3"
+                    ],
+                    "osType": "Linux",
+                    "enableAutoScaling": true,
+                    "maxCount": 6,
+                    "minCount": 0,
+                    "mode": "User",
+                    "nodeLabels": {},
+                    "nodeTaints": []
+                }
+            ]
+        },
+        "aksAADAdminGroups": {
+            "value": [
+                "7fea8567-e0aa-40dd-bcd6-cbb6d556b4d3"
+            ]
         }
     }
 }

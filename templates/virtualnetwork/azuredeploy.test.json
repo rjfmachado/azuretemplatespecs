@@ -3,7 +3,42 @@
     "contentVersion": "1.0.0.0",
     "parameters": {
         "vnetName": {
-            "value": "vnetname"
+            "value": "aksvnet"
+        },
+        "vnetAddressSpace": {
+            "value": {
+                "addressPrefixes": [
+                    "10.0.0.0/8"
+                ]
+            }
+        },
+        "vnetSubnetArray": {
+            "value": [
+                {
+                    "name": "AzureFirewallSubnet",
+                    "properties": {
+                        "addressPrefix": "10.0.0.0/24"
+                    }
+                },
+                {
+                    "name": "GatewaySubnet",
+                    "properties": {
+                        "addressPrefix": "10.0.1.0/24"
+                    }
+                },
+                {
+                    "name": "aks",
+                    "properties": {
+                        "addressPrefix": "10.1.0.0/16"
+                    }
+                },
+                {
+                    "name": "app1",
+                    "properties": {
+                        "addressPrefix": "10.2.0.0/16"
+                    }
+                }
+            ]
         }
     }
 }

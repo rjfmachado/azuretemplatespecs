@@ -8,7 +8,7 @@
                 "description": "Virtual Network name"
             }
         },
-        "addressSpace": {
+        "vnetAddressSpace": {
             "type": "object",
             "defaultValue": {
                 "addressPrefixes": [
@@ -19,7 +19,7 @@
                 "description": "description"
             }
         },
-        "subnetArray": {
+        "vnetSubnetArray": {
             "type": "array",
             "defaultValue": [
                 {
@@ -40,7 +40,7 @@
                 "description": "Virtual Network subnets array"
             }
         },
-        "dnsServers": {
+        "vnetDnsServers": {
             "type": "array",
             "defaultValue": [],
             "metadata": {
@@ -72,10 +72,10 @@
             "location": "[resourceGroup().location]",
             "tags": "[if(empty(parameters('tags')), json('null'), parameters('tags'))]",
             "properties": {
-                "addressSpace": "[parameters('addressSpace')]",
-                "subnets": "[parameters('subnetArray')]",
+                "addressSpace": "[parameters('vnetAddressSpace')]",
+                "subnets": "[parameters('vnetSubnetArray')]",
                 "dhcpOptions": {
-                    "dnsServers": "[parameters('dnsServers')]"
+                    "dnsServers": "[parameters('vnetDnsServers')]"
                 }
             }
         }
