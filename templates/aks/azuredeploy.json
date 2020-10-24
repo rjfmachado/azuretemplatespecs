@@ -35,7 +35,7 @@
                     "enableAutoScaling": true,
                     "maxCount": 6,
                     "minCount": 2,
-                    "mode": "System",
+                    "mode": "System", // User
                     "nodeLabels": {},
                     "nodeTaints": []
                 }
