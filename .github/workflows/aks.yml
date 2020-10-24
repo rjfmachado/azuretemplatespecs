@@ -34,9 +34,5 @@ jobs:
           enable-AzPSSession: false
 
       # Runs a single command using the runners shell
-      - name: temp
-        run: ls -la
-
-      # Runs a single command using the runners shell
       - name: deploy aks templatespec
         run: az ts create --name aks --resource-group templateSpecs --location westeurope --template-file ./azuredeploy.json --version "0.0.1"
