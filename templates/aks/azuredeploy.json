@@ -98,7 +98,7 @@
         "vnetName": {
             "type": "string",
             "metadata": {
-                "description": "Name of the Virtual Network"
+                "description": "Name of the Virtual Network."
             }
         },
         "vnetResourceGroupName": {
