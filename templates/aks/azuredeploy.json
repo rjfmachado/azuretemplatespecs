@@ -104,7 +104,7 @@
         "vnetResourceGroupName": {
             "type": "string",
             "metadata": {
-                "description": "Name of the resource Group containing the target vNet."
+                "description": "Name of the resource Group containing the target virtual network."
             }
         }
     },
