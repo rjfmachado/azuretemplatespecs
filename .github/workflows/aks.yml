@@ -1,7 +1,5 @@
-name: Deploy AKS TemplateSpec
+name: Deploy AKS Template Spec
 
-# Controls when the action will run. Triggers the workflow on push or pull request
-# events but only for the main branch
 on:
   push:
     branches: [main]
@@ -18,14 +16,10 @@ defaults:
     shell: bash
     working-directory: templates/aks/
 
-# A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
-  # This workflow contains a single job called "build"
   build:
-    # The type of runner that the job will run on
     runs-on: ubuntu-latest
 
-    # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v2
@@ -36,8 +30,7 @@ jobs:
           creds: ${{secrets.AZURE_HOTMAIL_TEMPLATESPECS}}
           enable-AzPSSession: false
 
-      # Runs a single command using the runners shell
-      - name: "deploy ${templateSpec} templatespec"
+      - name: Deploy Template Spec
         run: az ts create --name "$templateSpec" --resource-group templateSpecs --location westeurope --template-file ./azuredeploy.json --version "$templateSpecVersion"
 
       - name: Azure (Microsoft)
@@ -46,8 +39,7 @@ jobs:
           creds: ${{secrets.AZURE_MSFT_TEMPLATESPECS}}
           enable-AzPSSession: false
 
-      # Runs a single command using the runners shell
-      - name: deploy ${templateSpec} templatespec
+      - name: Deploy Template Spec
         run: az ts create --name "$templateSpec" --resource-group templateSpecs --location westeurope --template-file ./azuredeploy.json --version "$templateSpecVersion"
 
       - name: Azure (Live)
@@ -56,6 +48,5 @@ jobs:
           creds: ${{secrets.AZURE_LIVE_TEMPLATESPECS}}
           enable-AzPSSession: false
 
-      # Runs a single command using the runners shell
-      - name: deploy ${templateSpec} templatespec
+      - name: Deploy Template Spec
         run: az ts create --name "$templateSpec" --resource-group templateSpecs --location westeurope --template-file ./azuredeploy.json --version "$templateSpecVersion"
