@@ -30,7 +30,17 @@ jobs:
       - name: Azure (rjfmachadoprod)
         uses: azure/login@v1
         with:
-          creds: ${{secrets.AZURE_CREDENTIALS}}
+          creds: ${{secrets.AZURE_HOTMAIL_TEMPLATESPECS}}
+          enable-AzPSSession: false
+
+      # Runs a single command using the runners shell
+      - name: deploy aks templatespec
+        run: az ts create --name aks --resource-group templateSpecs --location westeurope --template-file ./azuredeploy.json --version "0.0.1"
+
+      - name: Azure (Microsoft)
+        uses: azure/login@v1
+        with:
+          creds: ${{secrets.AZURE_MSFT_TEMPLATESPECS}}
           enable-AzPSSession: false
 
       # Runs a single command using the runners shell
