@@ -8,7 +8,7 @@ A collection of template specs for anything Azure.
 
 ## Setup
 
-Create a secret in Github with the output of the following command for each Azure environment.
+1. Create a secret in Github with the output of the following command for each Azure environment.
 
 ``` bash
 az ad sp create-for-rbac \
@@ -17,4 +17,10 @@ az ad sp create-for-rbac \
   --scopes /subscriptions/$(az account show --query id -o tsv)/resourceGroups/templateSpecs \
   --sdk-auth \
   -o jsonc
+```
+
+1. Create a resource group to target the deployment.
+
+``` bash
+az group create --name templateSpecs --location westeurope
 ```
