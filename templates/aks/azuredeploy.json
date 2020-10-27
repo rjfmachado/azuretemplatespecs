@@ -172,10 +172,10 @@
                     }
                 ],
                 "networkProfile": "[parameters('networkProfile')]",
-                "aadProfile": {
-                    "managed": false,
-                    "adminGroupObjectIDs": "[parameters('aksAADAdminGroups')]"
-                },
+                // "aadProfile": {
+                //     "managed": false,
+                //     "adminGroupObjectIDs": "[parameters('aksAADAdminGroups')]"
+                // },
                 "apiServerAccessProfile": {
                     "authorizedIPRanges": "[if(parameters('privateCluster'), json('[]'), parameters('ipWhitelist'))]",
                     "enablePrivateCluster": "[parameters('privateCluster')]"
