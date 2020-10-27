@@ -173,7 +173,7 @@
                 ],
                 "networkProfile": "[parameters('networkProfile')]",
                 "aadProfile": {
-                    "managed": true,
+                    "managed": false,
                     "adminGroupObjectIDs": "[parameters('aksAADAdminGroups')]"
                 },
                 "apiServerAccessProfile": {
