@@ -1,5 +1,9 @@
 # Template Specs
 
+![Deploy ACR Template Spec](https://github.com/rjfmachado/azuretemplatespecs/workflows/Deploy%20ACR%20Template%20Spec/badge.svg)
+![Deploy Virtual Network Template Spec](https://github.com/rjfmachado/azuretemplatespecs/workflows/Deploy%20Virtual%20Network%20Template%20Spec/badge.svg)
+![Deploy AKS Template Spec](https://github.com/rjfmachado/azuretemplatespecs/workflows/Deploy%20AKS%20Template%20Spec/badge.svg)
+
 A collection of template specs for anything Azure.
 
 ## Setup
