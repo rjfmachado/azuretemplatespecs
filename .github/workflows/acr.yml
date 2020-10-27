@@ -1,0 +1,52 @@
+name: Deploy ACR Template Spec
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - templates/acr/**
+  workflow_dispatch:
+
+env:
+  templateSpec: acr
+  templateSpecVersion: 0.0.1
+
+defaults:
+  run:
+    shell: bash
+    working-directory: templates/acr/
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+      - uses: actions/checkout@v2
+
+      - name: Azure (Hotmail)
+        uses: azure/login@v1
+        with:
+          creds: ${{secrets.AZURE_HOTMAIL_TEMPLATESPECS}}
+          enable-AzPSSession: false
+
+      - name: Deploy Template Spec
+        run: az ts create --name "$templateSpec" --resource-group templateSpecs --location westeurope --template-file ./azuredeploy.json --version "$templateSpecVersion"
+
+      - name: Azure (Microsoft)
+        uses: azure/login@v1
+        with:
+          creds: ${{secrets.AZURE_MSFT_TEMPLATESPECS}}
+          enable-AzPSSession: false
+
+      - name: Deploy Template Spec
+        run: az ts create --name "$templateSpec" --resource-group templateSpecs --location westeurope --template-file ./azuredeploy.json --version "$templateSpecVersion"
+
+      - name: Azure (Live)
+        uses: azure/login@v1
+        with:
+          creds: ${{secrets.AZURE_LIVE_TEMPLATESPECS}}
+          enable-AzPSSession: false
+
+      - name: Deploy Template Spec
+        run: az ts create --name "$templateSpec" --resource-group templateSpecs --location westeurope --template-file ./azuredeploy.json --version "$templateSpecVersion"
