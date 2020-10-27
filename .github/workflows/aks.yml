@@ -57,5 +57,5 @@ jobs:
           enable-AzPSSession: false
 
       # Runs a single command using the runners shell
-      - name: deploy ${{templateSpec}} templatespec
+      - name: deploy ${templateSpec} templatespec
         run: az ts create --name "$templateSpec" --resource-group templateSpecs --location westeurope --template-file ./azuredeploy.json --version "$templateSpecVersion"
