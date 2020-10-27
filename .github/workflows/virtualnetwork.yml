@@ -1,6 +1,6 @@
 # This is a basic workflow to help you get started with Actions
 
-name: deployAKS
+name: deployVirtualNetwork
 
 # Controls when the action will run. Triggers the workflow on push or pull request
 # events but only for the main branch
@@ -8,16 +8,16 @@ on:
   push:
     branches: [main]
     paths:
-      - templates/aks/**
+      - templates/virtualnetwork/**
 
 env:
-  templateSpec: "aks"
-  templateSpecVersion: "0.0.1"
+  templateSpec: 'aks'
+
 
 defaults:
   run:
     shell: bash
-    working-directory: "templates/$templateSpec/"
+    working-directory: templates/virtualnetwork/
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
@@ -38,8 +38,8 @@ jobs:
           enable-AzPSSession: false
 
       # Runs a single command using the runners shell
-      - name: "deploy $templateSpec templatespec"
-        run: az ts create --name "$templateSpec" --resource-group templateSpecs --location westeurope --template-file ./azuredeploy.json --version "$templateSpecVersion"
+      - name: deploy aks templatespec
+        run: az ts create --name virtualnetwork --resource-group templateSpecs --location westeurope --template-file ./azuredeploy.json --version "0.0.1"
 
       - name: Azure (Microsoft)
         uses: azure/login@v1
@@ -48,8 +48,8 @@ jobs:
           enable-AzPSSession: false
 
       # Runs a single command using the runners shell
-      - name: "deploy $templateSpec templatespec"
-        run: az ts create --name "$templateSpec" --resource-group templateSpecs --location westeurope --template-file ./azuredeploy.json --version "$templateSpecVersion"
+      - name: deploy aks templatespec
+        run: az ts create --name virtualnetwork --resource-group templateSpecs --location westeurope --template-file ./azuredeploy.json --version "0.0.1"
 
       - name: Azure (Live)
         uses: azure/login@v1
@@ -58,5 +58,5 @@ jobs:
           enable-AzPSSession: false
 
       # Runs a single command using the runners shell
-      - name: "deploy $templateSpec templatespec"
-        run: az ts create --name "$templateSpec" --resource-group templateSpecs --location westeurope --template-file ./azuredeploy.json --version "$templateSpecVersion"
+      - name: deploy aks templatespec
+        run: az ts create --name virtualnetwork --resource-group templateSpecs --location westeurope --template-file ./azuredeploy.json --version "0.0.1"
