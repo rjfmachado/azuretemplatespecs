@@ -27,7 +27,7 @@ jobs:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v2
 
-      - name: Azure (rjfmachadoprod)
+      - name: Azure (Hotmail)
         uses: azure/login@v1
         with:
           creds: ${{secrets.AZURE_HOTMAIL_TEMPLATESPECS}}
@@ -41,6 +41,16 @@ jobs:
         uses: azure/login@v1
         with:
           creds: ${{secrets.AZURE_MSFT_TEMPLATESPECS}}
+          enable-AzPSSession: false
+
+      # Runs a single command using the runners shell
+      - name: deploy aks templatespec
+        run: az ts create --name aks --resource-group templateSpecs --location westeurope --template-file ./azuredeploy.json --version "0.0.1"
+
+      - name: Azure (Live)
+        uses: azure/login@v1
+        with:
+          creds: ${{secrets.AZURE_LIVE_TEMPLATESPECS}}
           enable-AzPSSession: false
 
       # Runs a single command using the runners shell
