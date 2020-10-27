@@ -10,13 +10,13 @@ on:
   workflow_dispatch:
 
 env:
-  templateSpec: "aks"
-  templateSpecVersion: "0.0.1"
+  templateSpec: aks
+  templateSpecVersion: 0.0.1
 
 defaults:
   run:
     shell: bash
-    working-directory: "templates/$templateSpec/"
+    working-directory: "templates/${templateSpec}/"
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
@@ -37,7 +37,7 @@ jobs:
           enable-AzPSSession: false
 
       # Runs a single command using the runners shell
-      - name: "deploy $templateSpec templatespec"
+      - name: "deploy ${templateSpec} templatespec"
         run: az ts create --name "$templateSpec" --resource-group templateSpecs --location westeurope --template-file ./azuredeploy.json --version "$templateSpecVersion"
 
       - name: Azure (Microsoft)
@@ -47,7 +47,7 @@ jobs:
           enable-AzPSSession: false
 
       # Runs a single command using the runners shell
-      - name: "deploy $templateSpec templatespec"
+      - name: deploy ${templateSpec} templatespec
         run: az ts create --name "$templateSpec" --resource-group templateSpecs --location westeurope --template-file ./azuredeploy.json --version "$templateSpecVersion"
 
       - name: Azure (Live)
@@ -57,5 +57,5 @@ jobs:
           enable-AzPSSession: false
 
       # Runs a single command using the runners shell
-      - name: "deploy $templateSpec templatespec"
+      - name: deploy ${{templateSpec}} templatespec
         run: az ts create --name "$templateSpec" --resource-group templateSpecs --location westeurope --template-file ./azuredeploy.json --version "$templateSpecVersion"
