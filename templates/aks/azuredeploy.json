@@ -89,7 +89,6 @@
                 "loadBalancerSku": "standard",
                 "outboundType": "loadBalancer",
                 "networkPlugin": "azure",
-                "networkPolicy": "calico",
                 "serviceCidr": "10.254.0.0/16",
                 "dnsServiceIp": "10.254.0.4",
                 "dockerBridgeCidr": "172.17.0.1/16"
