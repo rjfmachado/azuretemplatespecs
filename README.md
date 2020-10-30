@@ -8,7 +8,7 @@ A collection of template specs for anything Azure.
 
 ## Setup
 
-1. Create a resource group to target the deployment.
+1. Create a resource group to target the deployment for each environment.
 
 ``` bash
 az group create --name templateSpecs --location westeurope
